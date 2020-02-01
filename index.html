@@ -15,7 +15,7 @@
         
         <div id=dataContainer style="display: none ">
 
-            <h1>Bose Frames - (jc - 7.1)</h1>
+            <h1>Bose Frames - (jc - 8.1)</h1>
 
             <h2>Sensor Data</h2>
 
@@ -240,6 +240,19 @@
         <script>
             const client = new Paho.MQTT.Client("ws://iot.eclipse.org/ws", "myClientId" + new Date().getTime());
             const boseARDeviceElement = document.querySelector("bose-ar-device");
+            
+            const myTopic = "jcframes"
+            
+            client.connect({ onSuccess: onConnect })
+            let counter = 0
+            function onConnect() {
+                console.log("connection successful")
+                client.subscribe(myTopic)   //subscribe to our topic
+                setInterval(()=>{
+                    publish(myTopic,                                
+                     `The count is now ${count++}`)
+                },5000)}                      //publish count every 5s
+
 
             boseARDeviceElement.addEventListener("connect", event => {
                 dataContainer.style.display = '';

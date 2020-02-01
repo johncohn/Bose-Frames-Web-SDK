@@ -15,7 +15,7 @@
         
         <div id=dataContainer style="display: none ">
 
-            <h1>Bose Frames - (jc - 6.1)</h1>
+            <h1>Bose Frames - (jc - 7.1)</h1>
 
             <h2>Sensor Data</h2>
 
@@ -238,7 +238,7 @@
         </div>
 
         <script>
-              
+            const client = new Paho.MQTT.Client("ws://iot.eclipse.org/ws", "myClientId" + new Date().getTime());
             const boseARDeviceElement = document.querySelector("bose-ar-device");
 
             boseARDeviceElement.addEventListener("connect", event => {
